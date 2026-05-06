@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+crewai
+crewai-tools
+langchain-community
+langchain-openai
+prometheus-client
+python-dotenv
+wikipedia

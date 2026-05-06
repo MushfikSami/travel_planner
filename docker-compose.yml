@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: 
+      context: ./backend
+    ports:
+      - "8000:8000"
+    # This extra_hosts line is CRITICAL for Linux hosts (like your A6000) 
+    # to resolve 'host.docker.internal' to the physical host machine where vLLM is running.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Mount the .env file so the container has your API keys
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    restart: unless-stopped
